@@ -1,0 +1,22 @@
+<div class="dropdown pull-right btn-group" role="group">
+    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="true">
+        {{title}}
+    </button>
+    <div class="dropdown-menu" style="padding:0;width: auto;height:107px"
+         aria-labelledby="dropdownMenu">
+        <div class="panel">
+            <div class="panel-body">
+                <input ng-model="content" style=" width:200px" type="text" class="form-control input-sm"
+                       placeholder="{{placeHolder}}"
+                       ng-click="$event.stopPropagation()">
+            </div>
+            <div class="panel-footer">
+                <button class="btn btn-xs btn-primary" type="submit" ng-click="submit()"><i class="fa fa-check"></i> 确认
+                </button>
+                <button class="btn btn-xs  btn-default"><i class="fa fa-minus"></i> 取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+

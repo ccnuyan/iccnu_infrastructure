@@ -1,0 +1,15 @@
+<section
+        data-ng-controller="RsAdminResourcesController"
+        data-ng-init="find()">
+    <div class="page-header hidden-xs">
+        <h1><i class="fa fa-unlock fa-2x pull-left"></i>资源审核</h1>
+    </div>
+    <br/>
+
+    <div ng-show="container.pages && container.pages>1">
+        <pagination ng-change="pageChanged()" total-items="container.total" ng-model="container.page" max-size="5"
+                    class="pagination-sm" boundary-links="true" rotate="false" num-pages="container.pages"></pagination>
+    </div>
+    <resource-list null-warning="'已经没有未审核的资源了。'" resource-list-type="'rsadmin-resource-list'"
+                   resources="container.resources"></resource-list>
+</section>

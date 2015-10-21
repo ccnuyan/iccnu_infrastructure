@@ -1,0 +1,85 @@
+.content {
+    margin-top: 40px;
+}
+
+body {
+    font-family: 微软雅黑, Tohoma;
+}
+
+.repeated-item {
+    margin: 1px;
+}
+
+/*/!*.repeated-item.ng-leave,*!/*/
+/*.repeated-item.ng-enter*/
+/*{*/
+/*transition: opacity 500ms;*/
+/*}*/
+
+/*.repeated-item.ng-enter,*/
+/*.repeated-item.ng-leave-active {*/
+/*opacity: 0;*/
+/*}*/
+
+/*.repeated-item.ng-enter-active {*/
+/*opacity: 1;*/
+/*}*/
+
+/*/!*.repeated-item.ng-enter-stagger,*!/*/
+/*/!*.repeated-item.ng-leave-stagger {*!/*/
+/*/!*transition-delay: 100ms;*!/*/
+/*/!*transition-duration: 0ms;*!/*/
+/*/!*}*!/*/
+
+.easy-show-hide.ng-hide-remove {
+    transition: opacity 350ms;
+}
+
+.easy-show-hide.ng-hide-add-active,
+.easy-show-hide.ng-hide-remove {
+    opacity: 0;
+}
+
+.easy-show-hide.ng-hide-remove-active {
+    opacity: 1;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.custom-file-upload {
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+}
+
+.well-item {
+    padding: 3px;
+    margin: 1px 0;
+}
+
+.template-item {
+    padding: 0 10px;
+    margin: 1px;
+    width: 100%;
+    text-align: left;
+    min-height: 30px;
+}
+
+.template-knowledge-node {
+    margin: 1px 1px;
+}
+
+responsive-title {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+section {
+    margin: 0
+}

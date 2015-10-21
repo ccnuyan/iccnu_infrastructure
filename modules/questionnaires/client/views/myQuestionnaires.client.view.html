@@ -1,0 +1,50 @@
+﻿<section data-ng-controller="MyQuestionnairesController" ng-init="find()">
+    <div class="page-header hidden-xs">
+        <h1><i class="fa fa-hdd-o fa-2x pull-left"></i>问卷调查</h1>
+    </div>
+    <br/>
+
+    <div style="width: 100%">
+        <a style="display: table;margin:0 auto" class="btn btn-primary" type="download" target="blank"
+           href="/pptquestionnaire/setup.exe">下载PowerPoint问卷插件</a>
+    </div>
+
+    <div>
+        <br>
+    </div>
+
+    <ul class="list-group">
+        <li ui-sref="questionnaires.questionnaire({questionnaire:questionnaire._id})" class="list-group-item"
+            ng-repeat="questionnaire in questionnaires">
+            <img style="height: 200px" class="img-responsive thumbnail"
+                 ng-src="api/questionnaire/attachments/{{questionnaire.image._id}}"/>
+
+            <div ng-repeat="c in choices.slice(0,questionnaire.choices)">
+                <div class="btn btn-xs">{{c.key}}:{{questionnaire['choice'+c.key]}} / {{
+                    questionnaire.choiceA+
+                    questionnaire.choiceB+
+                    questionnaire.choiceC+
+                    questionnaire.choiceD+
+                    questionnaire.choiceE+
+                    questionnaire.choiceF+
+                    questionnaire.choiceG+
+                    questionnaire.choiceH
+                    }}
+                </div>
+                <span class="pull-right" style="width: 80%">
+                    <progressbar type="{{c.choiceType}}" class="{{c.choiceClass}}" type="" ng-style="{color:c.color}"
+                                 value="(total === 0) ? 0 : (questionnaire['choice'+c.key]*100/questionnaire.choiceA+
+                    questionnaire.choiceB+
+                    questionnaire.choiceC+
+                    questionnaire.choiceD+
+                    questionnaire.choiceE+
+                    questionnaire.choiceF+
+                    questionnaire.choiceG+
+                    questionnaire.choiceH)" max="100">
+                    </progressbar>
+                </span>
+            </div>
+        </li>
+    </ul>
+    <ng-include src="'/modules/questionnaires/views/newQuestionnaire.model.client.view.html'"></ng-include>
+</section>

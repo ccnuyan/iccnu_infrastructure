@@ -1,0 +1,20 @@
+<section
+        data-ng-controller="MyResourcesController"
+        data-ng-init="find()">
+    <div class="page-header hidden-xs">
+        <h1><i class="fa fa-files-o fa-2x pull-left"></i>我的资源</h1>
+    </div>
+    <br/>
+
+    <div ng-show="container.pages && container.pages>1">
+        <pagination ng-change="pageChanged()" total-items="container.total" ng-model="container.page" max-size="5"
+                    class="pagination-sm" boundary-links="true" rotate="false" num-pages="container.pages"></pagination>
+    </div>
+    <resource-list resource-list-type="'my-resource-list'" search-on="true"
+                   null-warning="'你还没有发布过资源，可以去网盘中将你的网盘文件发布成资源给他人分享。'"
+                   resources="container.resources"></resource-list>
+    <div class="button-group">
+        <button class="btn btn-primary" ng-click="publishTempFile()">发布资源</button>
+    </div>
+    <ng-include src="'/modules/resources/views/publisher.modal.client.view.html'"></ng-include>
+</section>

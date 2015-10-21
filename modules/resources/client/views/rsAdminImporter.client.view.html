@@ -1,0 +1,17 @@
+<section
+        data-ng-controller="RsAdminImporterController"
+        data-ng-init="find()">
+    <div class="page-header hidden-xs">
+        <h1><i class="fa fa-unlock fa-2x pull-left"></i>资源批量添加</h1>
+    </div>
+    <br/>
+    <label>
+        选择 .xlsx 文件导入
+    </label>
+
+    <div>
+        <ng-include src="'/modules/resources/views/tempFileUploader.part.client.view.html'"></ng-include>
+    </div>
+    <resource-list resource-list-type="'imported-resource-list'"
+                   resources="resources"></resource-list>
+</section>

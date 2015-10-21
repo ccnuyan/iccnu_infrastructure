@@ -1,0 +1,4 @@
+<a ng-click="onClick();$event.stopPropagation();" class="badge" style="cursor: pointer"
+   href="{{downloadUrl}}" download>
+    <span class="hidden-xs">{{showText}}</span> <i class="fa fa-cloud-download"></i> <span class="hidden-xs">{{size/1024/1024|number:2}}MB</span>
+</a>

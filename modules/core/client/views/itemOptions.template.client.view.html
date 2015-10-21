@@ -1,0 +1,25 @@
+<div class="dropdown">
+    <button class="btn btn-primary btn-xs dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="true">
+        <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu pull-right" aria-labelledby="dropdownMenu" style="border-width: 2px">
+        <li ng-show="flagEdit" ng-click="onEdit()"><a><i class="fa fa-pencil-square-o" style="width:20px"></i>
+            {{editTitle||'编辑'}}</a></li>
+        <li ng-show="flagMove" ng-click="onMove()"><a><i class="fa fa-exchange" style="width:20px"></i>
+            {{moveTitle||'移动'}}</a></li>
+        <li ng-show="flagShareFriend" ng-click="onShareFriend()"><a><i class="fa fa-user" style="width:20px"></i>
+            {{shareFriendTitle||'分享至好友'}}</a></li>
+        <li ng-show="flagShareGroup" ng-click="onShareGroup()"><a><i class="fa fa-users" style="width:20px"></i>
+            {{shareGroupTitle||'分享至好友分组'}}</a></li>
+        <li ng-show="flagPublish" ng-click="onPublish()"><a><i class="fa fa-globe" style="width:20px"></i>
+            {{publishTitle||'发布'}}</a></li>
+        <li ng-show="flagApprove" ng-click="onApprove()"><a><i class="fa fa-check" style="width:20px"></i>
+            {{approveTitle||'通过'}}</a></li>
+        <li ng-show="flagReject" ng-click="onReject()"><a><i class="fa fa-times" style="width:20px"></i>
+            {{rejectTitle||'拒绝'}}</a></li>
+        <li ng-show="flagDelete" ng-click="onDelete()"><a><i class="fa fa-trash" style="width:20px"></i>
+            {{deleteTitle||'删除'}}</a></li>
+        <li><a>取消</a></li>
+    </ul>
+</div>

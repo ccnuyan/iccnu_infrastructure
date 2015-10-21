@@ -1,0 +1,70 @@
+<section
+        data-ng-controller="ResourceSearcherController"
+        data-ng-init="init()">
+    <div class="page-header hidden-xs">
+        <h1><i class="fa fa-search fa-2x pull-left"></i>资源搜索</h1>
+    </div>
+    <br/>
+
+    <div style="margin: 2px">资源库中的资源总数：{{resourcesSiteInfo.count}}</div>
+    <div class="panel">
+        <ul class="nav nav-pills">
+            <li role="presentation" class="repeated-item" data-ng-repeat="subject in subjects"
+                ng-class="subject.active">
+                <a style="padding: 5px 13px;cursor: pointer" ng-click="selectSubject(subject)">{{subject.name}}</a>
+            </li>
+        </ul>
+        <div class="input-group panel-heading" style="padding:0">
+            <input ng-enter="search();searchKnowledgeNode();" type="text" class="form-control" ng-model="searchTerm"
+                   placeholder="Search for...">
+            <span class="input-group-btn">
+                <button ng-click="search();searchKnowledgeNode();" class="btn btn-primary" type="button">Go!</button>
+            </span>
+        </div>
+        <div ng-show="searched">
+            <div ng-show="knowledgeNodes">
+                <knowledge-node-list on-click="selectKnowledgeNode"
+                                     knowledge-nodes="knowledgeNodes"
+                                     null-warning="'没有找到与相关的知识点。'"></knowledge-node-list>
+            </div>
+            <ul class="list-inline" ng-show="res_meta_types.length">
+                <li class="repeated-item" data-ng-repeat="restype in res_meta_types">
+                    <div class="btn btn-xs btn-warning" ng-click="selectResourceType(restype)">{{restype.name}}</div>
+                </li>
+            </ul>
+            <ul class="list-inline" ng-show="selectedKnowledgeNode||selectedResourceType">
+                <li class="repeated-item">
+                    搜索范围：
+                </li>
+                <li class="repeated-item" ng-show="selectedKnowledgeNode">
+                    <div class="btn btn-xs btn-danger" ng-click="unSelectKnowledgeNode()">
+                        <i class="fa fa-remove "></i>
+                        {{selectedKnowledgeNode.title}}
+                    </div>
+                </li>
+                <li class="repeated-item" ng-show="selectedResourceType">
+                    <div class="btn btn-xs btn-danger" ng-click="unSelectResourceType()">
+                        <i class="fa fa-remove "></i>
+                        {{selectedResourceType.name}}
+                    </div>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+    <div class="easy-show-hide" ng-show="resourcesSiteInfo && !searched">
+        <h4>最新资源：</h4>
+        <resource-list null-warning="'没有找到最新的资源。'" resource-list-type="'searcher-result'"
+                       resources="resourcesSiteInfo.resources"></resource-list>
+    </div>
+
+    <div class="easy-show-hide">
+        <div ng-show="container.pages && container.pages>1">
+            <pagination ng-change="pageChanged()" total-items="container.total" ng-model="container.page" max-size="5"
+                        class="pagination-sm" boundary-links="true" rotate="false"
+                        num-pages="container.pages"></pagination>
+        </div>
+        <resource-list null-warning="'没有找到符合条件的资源。'" resource-list-type="'searcher-result'"
+                       resources="container.resources"></resource-list>
+    </div>
+</section>

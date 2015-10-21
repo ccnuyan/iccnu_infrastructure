@@ -1,0 +1,12 @@
+<section
+        data-ng-controller="FriendShareController" data-ng-init="init()">
+    <div class="page-header hidden-xs">
+        <h1><i class="fa fa-users fa-2x pull-left"></i>我的好友</h1>
+    </div>
+    <br/>
+
+    <h3>好友“{{container.displayName}}”的分享</h3>
+
+    <file-list null-warning="'该用户没有给你共享文件'" file-list-type="'shared-file-list'"
+               files="container.sharedFiles"></file-list>
+</section>

@@ -1,0 +1,76 @@
+<div ng-show="searchOn">
+    <input placeholder="键入关键字" style="width: 240px" class="form-control" type="text" ng-model="search"/>
+    <br/>
+</div>
+<div>
+    <table class="table table-condensed table-hover table-responsive"
+           style="width:100%;border: none">
+        <tbody>
+        <tr class="repeated-item" ng-repeat="file in files | filter:search">
+            <td style="border: none;width:auto">
+                <i class="fa fa-file fa-2x"></i>
+            </td>
+            <td class="template-item" style="width:100%;border: none">
+                <div class="pull-right">
+                    <div tooltip="已给{{file.sharedGroups.length}}用户组共享" style="margin:2px"
+                         style="font-weight: normal"
+                         ng-show="file.sharedGroups&&file.sharedGroups.length>0"
+                         class="badge hidden-xs">
+                        <i class="fa fa-users" style="width:15px"></i>
+                        {{file.sharedGroups.length}}
+                    </div>
+                    <div tooltip="已给{{file.sharedUsers.length}}用户共享" style="margin:2px"
+                         style="font-weight: normal"
+                         ng-show="file.sharedUsers&&file.sharedUsers.length>0"
+                         class="badge pull-right hidden-xs">
+                        <i class="fa fa-user" style="width:15px"></i>
+                        {{file.sharedUsers.length}}
+                    </div>
+                    <br/>
+                </div>
+                <div ng-show="!file.isEditing"
+                     style="margin:7px; vertical-align: 50%;white-space: nowrap;cursor: pointer">
+                    <responsive-title responsive-title="file.name"></responsive-title>
+                </div>
+                <div ng-show="file.isEditing"
+                     style="margin:7px; vertical-align: 50%;white-space: nowrap;cursor: pointer"
+                     class="input-group">
+                    <input class="form-control input-sm"
+                           ng-model="file.itemToEdit.name"
+                           ng-click="$event.stopPropagation()"
+                           type="text"
+                           placeholder="输入文件名称"/>
+                    <confirm-or-cancel class="input-group-btn" style="margin:5px" opt-confirm="confirm(file)"
+                                       opt-cancel="cancel(file)"></confirm-or-cancel>
+                </div>
+            </td>
+            <td style="border: none;width:auto">
+                <item-download item-url="{{getDownloadUrl(file)}}" show-text="下载"
+                               item-size="{{file.fileObject.size}}"></item-download>
+            </td>
+            <td style="border: none;width:40px" ng-if="fileListType === 'directory-file-list'">
+                <item-options opt-move="move(file)"
+                              opt-delete="delete(file)"
+                              opt-edit="edit(file)"
+                              opt-share-friend="shareFriend(file)"
+                              opt-share-group="groupShare(file)"
+                              opt-publish="publish(file)"
+
+                              flag-move="true"
+                              flag-delete="true"
+                              flag-edit="true"
+                              flag-share-friend="true"
+                              flag-share-group="true"
+                              flag-publish="true"
+
+                              edit-title="重命名文件">
+                </item-options>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div class="alert alert-warning text-center hidden-xs"
+     data-ng-if="nullWarning && files && !files.length">
+    {{nullWarning}}
+</div>

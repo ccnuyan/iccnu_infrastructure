@@ -1,0 +1,56 @@
+﻿﻿﻿﻿﻿<!-- The chat view -->
+<section data-ng-controller="QuestionnaireItemController" ng-init="find()">
+    <div class="page-header hidden-xs">
+        <h1><i class="fa fa-hdd-o fa-2x pull-left"></i>问卷调查</h1>
+    </div>
+    <br/>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="btn-group">
+                <div ng-show="authentication.user && authentication.user._id === questionnaire.user"
+                     class="btn btn-danger" ng-click="clear()">清空问卷提交记录
+                </div>
+                <div class="btn btn-success" ng-click="showQrCode()">二维码</div>
+            </div>
+        </div>
+        <div class="col-md-8 hidden-xs">
+            <div class=" text-muted">
+                创建: {{questionnaire.created | date:'shortDate'}} {{questionnaire.created | date:'shortTime'}}
+                修改: {{questionnaire.created | date:'shortDate'}} {{questionnaire.updated | date:'shortTime'}}
+            </div>
+        </div>
+    </div>
+
+    <br/>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div ng-if="!submitted">
+                <ul class="list-group">
+                    <li class="btn btn-{{c.choiceType}}"
+                        ng-repeat="c in choices.slice(0,questionnaire.choices)"
+                        style="width:60px;margin:1px"
+                        ng-click="submit(c.key)">{{c.key}}
+                    </li>
+                </ul>
+            </div>
+
+            <div ng-if="submitted" ng-repeat="c in choices.slice(0,questionnaire.choices)">
+                <div class="btn btn-xs">{{c.key}}:{{questionnaire['choice'+c.key]}} / {{total}}
+                </div>
+                <span class="pull-right" style="width: 80%">
+                    <progressbar type="{{c.choiceType}}" class="{{c.choiceClass}}" type="" ng-style="{color:c.color}"
+                                 value="(total === 0) ? 0 : (questionnaire['choice'+c.key]*100/total)" max="100">
+                    </progressbar>
+                </span>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <img class="img-responsive thumbnail"
+                 ng-src="api/questionnaire/attachments/{{questionnaireImage}}"/>
+            <br/>
+        </div>
+    </div>
+    <ng-include src="'/modules/questionnaires/views/qrCode.modal.client.view.html'"></ng-include>
+</section>

@@ -1,0 +1,72 @@
+<div ng-show="searchOn">
+    <input placeholder="键入关键字" style="width: 240px" class="form-control" type="text" ng-model="search"/>
+</div>
+<div>
+    <table class="table table-condensed table-hover table-responsive"
+           style="width:100%;border: none">
+        <tbody>
+        <tr ng-if="isParentVisible">
+            <td ng-if="isTarget" class="pull-left" style="width: auto;border: none">
+                <label for="parentCheck" hidden></label>
+                <input ng-click="onCheck(directory)" id="parentCheck" type="checkbox"
+                       ng-checked="directory._id === selectedDirectory._id"/>
+            </td>
+            <td style="border: none;width:auto">
+                <i class="fa fa-folder-open fa-2x"></i>
+            </td>
+            <td class="template-item" style="border: none">
+                <div ng-click="onClick(directory)" ng-show="!directory.isEditing"
+                     style="margin:7px; vertical-align: 50%;white-space: nowrap;cursor: pointer">
+                    <responsive-title responsive-title="directory.name"></responsive-title>
+                </div>
+            </td>
+            <td style="border: none;width:auto">
+                <div class="badge pull-right" style="margin:2px">{{directory.subDirectories.length +
+                    directory.subFiles.length}}
+                </div>
+            </td>
+        </tr>
+        <tr style="width:100%;" class="repeated-item" ng-repeat="directory in directories | filter:search">
+            <td ng-if="isTarget" class="pull-left" style="width: auto;border: none">
+                <label for="directoryCheck" hidden></label>
+                <input ng-click="onCheck(directory)" id="directoryCheck" type="checkbox"
+                       ng-checked="directory._id === selectedDirectory._id"/>
+            </td>
+            <td style="border: none;width:auto">
+                <i class="fa fa-folder fa-2x"></i>
+            </td>
+            <td class="template-item" style="height:42px;border: none">
+                <div ng-click="onClick(directory)" ng-show="!directory.isEditing"
+                     style="margin:7px; vertical-align: 50%;white-space: nowrap;cursor: pointer">
+                    <responsive-title responsive-title="directory.name"></responsive-title>
+                </div>
+                <div ng-show="directory.isEditing"
+                     style="margin:7px; vertical-align: 50%;white-space: nowrap;cursor: pointer"
+                     class="input-group">
+                    <input class="form-control input-sm"
+                           ng-model="directory.itemToEdit.name"
+                           ng-click="$event.stopPropagation()"
+                           type="text"
+                           placeholder="输入文件名称"/>
+                    <confirm-or-cancel class="input-group-btn" style="margin:5px" opt-confirm="confirm(directory)"
+                                       opt-cancel="cancel(directory)"></confirm-or-cancel>
+                </div>
+            </td>
+            <td style="border: none;width:auto">
+                <div class="badge pull-right" style="margin:2px">{{directory.subDirectories.length +
+                    directory.subFiles.length}}
+                </div>
+            </td>
+            <td ng-if="!isTarget" style="border: none;width:40px">
+                <item-options opt-delete="delete(directory)" opt-edit="edit(directory)"
+                              flag-delete="true" flag-edit="true" edit-title="重命名目录">
+                </item-options>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div class="alert alert-warning text-center hidden-xs"
+     data-ng-if="nullWarning && directories && !directories.length">
+    {{nullWarning}}
+</div>

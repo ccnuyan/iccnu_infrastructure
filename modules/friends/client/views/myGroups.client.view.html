@@ -1,0 +1,14 @@
+<section
+        data-ng-controller="MyGroupsController" data-ng-init="find()">
+    <div class="page-header hidden-xs">
+        <h1><i class="fa fa-users fa-2x pull-left"></i>我的好友</h1>
+    </div>
+    <br/>
+
+    <h3>好友分组列表({{container.groups.length}})
+        <popup-dialog-text popup-button-title="添加分组" popup-place-holder="键入分组名" on-submit="create(name)"
+                           text-content="name"></popup-dialog-text>
+    </h3>
+    <group-list null-warning="'您还没有好友分组，您可以先创建一个好友分组。'" groups="container.groups"
+                group-list-type="'editable'"></group-list>
+</section>

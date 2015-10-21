@@ -1,0 +1,45 @@
+<section data-ng-controller="MyDiskController"
+         data-ng-init="init()">
+    <div class="page-header hidden-xs">
+        <h1><i class="fa fa-hdd-o fa-2x pull-left"></i>我的网盘</h1>
+    </div>
+    <br/>
+
+    <div class="panel input-group">
+        <div class="input-group-btn">
+            <button class="btn btn-lg btn-primary" type="button" ng-disabled="current.depth === 0"
+                    ui-sref="disk.directory({directory:current.parent})"
+                    type="button">
+                <i class="fa fa-chevron-circle-left"></i>
+            </button>
+            <button ng-click="init()" class="btn btn-lg btn-default">
+                <i class="fa fa-folder-open fa-1x" style="margin-top: -30px;margin-bottom:-30px"></i>
+                {{current.name}}
+            </button>
+        </div>
+        <!--<input placeholder="查找目录/文件..." class="form-control pull-right" type="text" ng-model="search"/>-->
+
+        <div class="input-group-btn">
+            <popup-dialog-text popup-button-title="新建目录" popup-place-holder="键入新目录名" on-submit="create(name)"
+                               text-content="name"></popup-dialog-text>
+        </div>
+    </div>
+
+    <directory-list directory-list-type="'editable'" directories="current.subDirectories"></directory-list>
+    <file-list file-list-type="'directory-file-list'" files="current.subFiles"></file-list>
+
+    <div class="alert alert-warning text-center hidden-xs"
+         data-ng-if="current.subDirectories.$resolved && !current.subDirectories.length && current.subFiles.$resolved && !current.subFiles.length">
+        这个目录下还没有内容，上传个文件试试啊?
+    </div>
+
+    <br/>
+
+    <div>
+        <ng-include src="'/modules/disk/views/uploader.part.client.view.html'"></ng-include>
+    </div>
+    <ng-include src="'/modules/resources/views/publisher.modal.client.view.html'"></ng-include>
+    <ng-include src="'/modules/friends/views/friends.modal.client.view.html'"></ng-include>
+    <ng-include src="'/modules/friends/views/groups.modal.client.view.html'"></ng-include>
+    <ng-include src="'/modules/disk/views/directories.modal.client.view.html'"></ng-include>
+</section>

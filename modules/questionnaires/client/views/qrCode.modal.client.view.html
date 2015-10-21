@@ -1,0 +1,14 @@
+﻿<script type="text/ng-template" id="qrCode.modal.client.view.html">
+    <div class="modal-header">
+        <h3 class="modal-title">扫二维码进入答题页</h3>
+    </div>
+    <div class="modal-body" data-ng-init="initDirectories()">
+        <qrcode version="4" error-correction-level="M" size="274" data="{{QrCodeText}}" href="{{QrCodeText}}"><a
+                class="qrcode-link" href="https://github.com/monospaced/angular-qrcode">
+            <canvas class="qrcode" height="274" width="274"></canvas>
+        </a></qrcode>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="ok()">OK</button>
+    </div>
+</script>

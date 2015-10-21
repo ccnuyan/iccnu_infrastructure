@@ -1,0 +1,102 @@
+<script type="text/ng-template" id="publisher.modal.client.view.html">
+    <div class="modal-header">
+        <h3 class="modal-title">发布资源</h3>
+    </div>
+    <div class="modal-body">
+        <form>
+            <div class="form-group">
+                <div ng-show="mode === 'regularPublisher'" class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="true">
+                        {{selectedMetaType?selectedMetaType.name:'选择资源形式'}}
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        <li ng-click="selectMetaType(type)" ng-repeat="type in res_meta_types"><a>{{type.name}}</a></li>
+                    </ul>
+                    <br>
+                </div>
+
+                <div>
+                    <div>
+                        <span ng-show="file&&!costumizeNameFlag">
+                            <label ng-bind="resTitle"></label>
+                            <!--<span>-->
+                                <!--<button class="btn-xs btn-danger" ng-click="costumizeNameFlag = true">-->
+                                    <!--我想给它起个与文件名不一样的资源名-->
+                                <!--</button>-->
+                            <!--</span>-->
+                            <button class="btn-xs btn-danger pull-right"
+                                    ng-click="costumizeNameFlag = true">
+                                给资源换个新名字
+                            </button>
+                        </span>
+                        <span ng-show="costumizeNameFlag||(selectedMetaType&&selectedMetaType.key === 'link')">
+                            <label for="file_res_title">资源名</label>
+                            <input id="file_res_title" style="width: 50%" type="text" class="form-control"
+                                   ng-model="resTitle"/>
+                        </span>
+                    </div>
+                </div>
+
+                <div ng-show="mode === 'regularPublisher' && selectedMetaType.key === 'file'">
+                    <div>
+                        <ng-include
+                                src="'/modules/resources/views/tempFileUploader.part.client.view.html'"></ng-include>
+                    </div>
+                </div>
+                <div ng-show="mode === 'regularPublisher' && selectedMetaType.key === 'link'">
+                    <label for="res_uri">链接地址</label>
+                    <textarea id="res_uri" ng-model="resUri" class="form-control" rows="2"></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>关联至知识点</label>
+
+                <div class="panel">
+                    <div class="input-group panel-heading" style="padding:0">
+                        <input ng-enter="search()" ng-model="searchTerm" type="text" class="form-control"
+                               placeholder="搜索知识点">
+
+                        <div class="input-group-btn">
+                            <button class="btn btn-success input-group-button" ng-show="selectedNode"
+                                    ng-click="removeNode()">
+                                <i class="fa fa-times"></i> 已关联至： {{selectedNode.title}}
+                            </button>
+                            <button class="btn btn-primary" input-group-button ng-click="search()" type="button">Go!
+                            </button>
+                        </div>
+                    </div>
+                    <div class="panel-body" ng-show="knowledgeNodes">
+                        <knowledge-node-list on-click="selectNode" knowledge-nodes="knowledgeNodes"
+                                             null-warning="'没有找到与相关的知识点。'"></knowledge-node-list>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="description">描述您的资源</label>
+                <textarea id="description" ng-model="resDescription" class="form-control" rows="7"></textarea>
+            </div>
+            <div class="dropdown" style="width: 50%">
+                <button class="btn btn-warning dropdown-toggle" type="button" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="true">
+                    {{selectedType?selectedType.name:'选择资源类型'}}
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                    <li ng-click="removeType()"><a> - - 不关联类型</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li ng-click="selectType(type)" ng-repeat="type in res_types"><a>{{type.name}}</a></li>
+                </ul>
+            </div>
+            <!--<div class="form-group" style="width: 50%">-->
+            <!--<label for="res_coverage">资源用途</label>-->
+            <!--<input id="res_coverage" class="form-control" type="text" ng-model="resCoverage"/>-->
+            <!--</div>-->
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="ok()">提交</button>
+        <button class="btn btn-warning" ng-click="cancel()">取消</button>
+    </div>
+</script>

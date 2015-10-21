@@ -1,0 +1,16 @@
+<script type="text/ng-template" id="groups.modal.client.view.html">
+    <div class="modal-header">
+        <h3 class="modal-title">{{thisObject.modalHeader}}</h3>
+    </div>
+    <div class="modal-body" data-ng-init="initGroups()">
+        <div class="form-horizontal">
+            <legend>{{thisObject.modalLegend}}</legend>
+            <group-list null-warning="'您还没有好友分组，您可以先创建一个好友分组。'" groups="container.groups"
+                        group-list-type="'target'"></group-list>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="ok()">提交</button>
+        <button class="btn btn-warning" ng-click="cancel()">取消</button>
+    </div>
+</script>

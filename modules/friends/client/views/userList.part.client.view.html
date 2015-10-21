@@ -1,0 +1,33 @@
+<div class="easy-show-hide alert alert-warning text-center hidden-xs"
+     data-ng-if="users && !users.length">
+    {{nullWarning}}
+</div>
+<div ng-show="searchOn">
+    <input placeholder="键入关键字" style="width: 240px" class="form-control" type="text" ng-model="search"/>
+    <br/>
+</div>
+<div class="repeated-item" data-ng-repeat="user in users | filter:search">
+
+    <div ng-show="isTarget" class="pull-left" style="margin: 8px">
+        <label for="shareCheck" hidden></label>
+        <input id="shareCheck" type="checkbox" ng-model="user.isChecked"/>
+    </div>
+
+    <div class="template-item well"
+         style="white-space: nowrap">
+        <div class="pull-right" ng-show="!isReadOnly&&!isTarget">
+            <item-options opt-delete="delete(user)"
+                          opt-approve="approve(user)"
+                          opt-reject="reject(user)"
+                          delete-title="与其解除好友关系"
+                          flag-delete="isFriendList"
+                          flag-approve="isSubmissionList"
+                          flag-reject="isSubmissionList">
+            </item-options>
+        </div>
+        <h5 style="white-space: nowrap; cursor: pointer"
+            ng-click="onClick(user)">
+            <i class="fa fa-user fa-1x"></i> {{user.username}}<span class="hidden-xs">/ {{user.displayName}}/ {{user.email}}</span>
+        </h5>
+    </div>
+</div>

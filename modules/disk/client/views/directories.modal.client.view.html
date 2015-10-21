@@ -1,0 +1,35 @@
+<script type="text/ng-template" id="directories.modal.client.view.html">
+    <div class="modal-header">
+        <h3 class="modal-title">{{thisObject.modalHeader}}</h3>
+    </div>
+    <div class="modal-body" data-ng-init="initDirectories()">
+        <div class="form-horizontal">
+            <legend>{{thisObject.modalLegend}}</legend>
+            <div class="panel input-group">
+                <div class="input-group-btn">
+                    <button class="btn btn-primary" type="button" ng-disabled="current.depth === 0"
+                            ng-click="upward()"
+                            type="button">
+                        <i class="fa fa-chevron-circle-left"></i>
+                    </button>
+                    <button class="btn btn-default">
+                <span>
+                    <i class="fa fa-folder-open fa-3x" style="margin-top: -30px;margin-bottom:-30px"></i>
+                    {{current.name}}
+                </span>
+                    </button>
+                </div>
+            </div>
+            <directory-list directory-list-type="'target'"
+                            show-parent="true"
+                            parent-directory="current"
+                            selected-directory="selectedDirectory"
+                            null-warning="'该目录下已经没有目录了'"
+                            directories="current.subDirectories"></directory-list>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="ok()">提交</button>
+        <button class="btn btn-warning" ng-click="cancel()">取消</button>
+    </div>
+</script>

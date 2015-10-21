@@ -1,0 +1,23 @@
+<section
+        data-ng-controller="GroupController" data-ng-init="find()">
+    <div class="page-header hidden-xs">
+        <h1><i class="fa fa-users fa-2x pull-left"></i>好友分组</h1>
+    </div>
+    <br/>
+
+    <h3>
+        <button class="btn btn-primary" type="button" ng-disabled="current.depth === 0"
+                ui-sref="groups.list" type="button">
+            <i class="fa fa-chevron-circle-left"></i>
+        </button>
+        “{{container.name}}”成员列表({{container.members.length}})
+        <button class="btn btn-default pull-right" ng-click="addFriend(container)">
+            <i class="fa fa-user-plus fa-1x"></i>
+        </button>
+    </h3>
+
+    <user-list null-warning="'没有好友'" search-on="false" user-list-type="'read-only'"
+               users="container.members"></user-list>
+
+    <ng-include src="'/modules/friends/views/friends.modal.client.view.html'"></ng-include>
+</section>

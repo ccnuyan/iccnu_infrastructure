@@ -1,0 +1,64 @@
+<section
+        data-ng-controller="MyFriendsController" data-ng-init="find()">
+    <div class="page-header hidden-xs">
+        <h1><i class="fa fa-users fa-2x pull-left"></i>我的好友</h1>
+    </div>
+    <br/>
+
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            好友列表({{container.friends.length}})
+        </div>
+        <div class="panel-body">
+            <user-list null-warning="'没有好友'" search-on="false" user-list-type="'friend-list'"
+                       users="container.friends"></user-list>
+        </div>
+    </div>
+
+    <div class="panel panel-danger">
+        <div class="panel-heading">
+            好友申请({{container.submissions.length}})
+        </div>
+        <div ng-if="container.submissions.length" class="panel-body">
+            <user-list null-warning="'没有好友申请'" search-on="false" user-list-type="'submission-list'"
+                       users="container.submissions"></user-list>
+        </div>
+    </div>
+
+    <div class="panel">
+        <div class="panel-heading">
+            <div>
+                根据用户名查找用户
+            </div>
+            <div>
+                Eg. "{{user.username}}"是您的用户名.
+            </div>
+        </div>
+        <div class="panel-subheading">
+            <div>
+                <div class="input-group">
+                    <input ng-enter="findUser(searchParam.username)" type="text" class="form-control"
+                           ng-model="searchParam.username" placeholder="Search for...">
+                    <span class="input-group-btn">
+                        <button ng-click="findUser(searchParam.username)" class="btn btn-primary" type="button">Go!
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body" ng-show="result">
+            <div>
+                <h5 style="white-space: nowrap">
+                    <i class="fa fa-user fa-4x"></i>
+                    {{result.username}}<br>
+                    {{result.displayName}}<br>
+                    {{result.email}}
+                </h5>
+                <button class="btn btn-primary" ng-click="submitFriend(result._id)">
+                    <i class="fa fa-user-plus fa-1x"></i>
+                </button>
+                <br/>
+            </div>
+        </div>
+    </div>
+</section>

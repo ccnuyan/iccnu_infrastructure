@@ -1,0 +1,76 @@
+<div ng-show="searchOn && resources.length">
+    <input placeholder="键入关键字" style="width: 240px" class="form-control" type="text" ng-model="search"/>
+    <br/>
+</div>
+<div>
+    <table class="table table-condensed table-hover table-striped table-responsive"
+           style="width:100%;border: none">
+        <tbody>
+        <tr class="repeated-item" data-ng-repeat="resource in resources | filter:search">
+        <tr data-ng-repeat="resource in resources">
+            <td style="border: none;width:100%" ng-click="onClick(resource)">
+                <i class="fa fa-cloud fa-2x pull-left" ng-if="resource.res_meta_type === 'file'"></i>
+                <i class="fa fa-link fa-2x pull-left" ng-if="resource.res_meta_type === 'link'"></i>
+
+                <div class="row">
+                    <responsive-title responsive-title="resource.title"></responsive-title>
+                </div>
+                <div class="row" ng-show="selectedResourceId === resource._id">
+                    <div class="col-md-4 col-sm-12">
+                        <div ng-show="resource.res_type">
+                            <label for="res_type">类型：</label>
+                            <span id="res_type">{{resource.res_type_display}}</span>
+                        </div>
+                        <!--<div ng-show="resource.res_coverage">-->
+                        <!--<label for="res_coverage">用途：</label>-->
+                        <!--<span id="res_coverage">{{resource.res_coverage}}</span>-->
+                        <!--</div>-->
+                        <div ng-show="resource.knowledgeNode">
+                            <label for="knowledgeNode">知识点：</label>
+                            <span id="knowledgeNode">{{resource.knowledgeNode.title}}</span>
+                        </div>
+                    </div>
+                    <div class="col-md-8 col-sm-12">
+                        <div>{{resource.description}}</div>
+                    </div>
+                    <div class="col-xs-12" ng-if="(selectedResourceId === resource._id)">
+                        <button ng-show="resourceListType === 'my-resource-list'" class="btn btn-xs btn-primary"
+                                ng-click="delete(resource)">删除
+                        </button>
+                        <button ng-show="resourceListType === 'rsadmin-resource-list'" class="btn btn-xs btn-primary"
+                                ng-click="approve(resource)">通过
+                        </button>
+                        <button ng-show="resourceListType === 'rsadmin-resource-list'" class="btn btn-xs btn-danger"
+                                ng-click="reject(resource)">拒绝
+                        </button>
+                    </div>
+                </div>
+            </td>
+            <td style="border: none;width:auto">
+                <span ng-show="isStatusOn && resource.status === 'submitted'" class="badge">审核中</span>
+                <span ng-show="isStatusOn && resource.status === 'rejected'" class="badge">被拒绝</span>
+                <span ng-show="isStatusOn && resource.status === 'approved'" class="badge">已通过</span>
+            </td>
+            <td style="border: none;width:auto">
+                <item-download ng-if="resource.res_meta_type === 'file'" downloading="downloadHit(resource)"
+                               item-url="{{ '/api/resourceDownload/' +resource._id}}"
+                               show-text="下载({{resource.downloads}})"
+                               item-size="{{resource.fileObject.size}}"></item-download>
+                <a href="{{resource.res_link.uri}}" target="_blank" style="width: 100%" class="badge"
+                   ng-if="resource.res_meta_type === 'link'">
+                    <i class="fa fa-external-link"></i>
+                    Go!
+                </a>
+            </td>
+            <td style="border: none;width:auto">
+                <i class="fa fa-check" ng-show="flagOn&&resource.flag"></i>
+                <i class="fa fa-chain-broken" ng-show="flagOn&&!resource.flag"></i>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div class="easy-show-hide alert alert-warning text-center hidden-xs"
+     ng-show="resources && !resources.length">
+    {{nullWarning}}
+</div>

@@ -1,0 +1,14 @@
+it clone https://github.com/ccnuyan/iccnu.git
+npm install
+bower install --allow-root true
+gulp build
+
+docker build --tag ubuntu-iccnu-nodejs:1.0 .
+
+docker rm -f iccnu-node01 iccnu-node02 iccnu-node03
+
+docker run -p 8001:8080 --name=iccnu-node01 -d -v /temp/uploads:/uploads ubuntu-iccnu-nodejs:1.0
+docker run -p 8002:8080 --name=iccnu-node02 -d -v /temp/uploads:/uploads ubuntu-iccnu-nodejs:1.0
+docker run -p 8003:8080 --name=iccnu-node03 -d -v /temp/uploads:/uploads ubuntu-iccnu-nodejs:1.0
+
+

@@ -1,0 +1,11 @@
+<div class="easy-show-hide alert alert-warning text-center hidden-xs"
+     ng-show="knowledgeNodes && !knowledgeNodes.length">
+    {{nullWarning}}
+</div>
+
+<ul class="list-inline">
+    <li class="repeated-item" data-ng-repeat="knowledgeNode in knowledgeNodes">
+        <knowledge-node-unit ng-click="onClick(knowledgeNode)" knowledge-node="knowledgeNode">
+        </knowledge-node-unit>
+    </li>
+</ul>

@@ -1,0 +1,45 @@
+http://developer.openstack.org/api-ref-objectstorage-v1.html
+
+0 Authentication
+
+GET http://119.97.166.140:8080/auth/v1.0 HTTP/1.1
+X-Storage-User: system:root
+X-Storage-Pass: testpass
+Host: 119.97.166.140:8080
+
+1 Lists containers for a specified account. Creates, updates, shows, and deletes account metadata.
+
+GET http://119.97.166.140:8080/v1/AUTH_system HTTP/1.1
+x-auth-token: AUTH_tk53ee796b3fb6464792af5246fdd2efc6
+x-storage-token: AUTH_tk53ee796b3fb6464792af5246fdd2efc6
+Host: 119.97.166.140:8080
+
+2 Lists objects in a specified container. Creates, shows details for, and deletes containers. Creates, updates, shows, and deletes container metadata.
+
+2.1 Show container details and list objects
+GET http://119.97.166.140:8080/v1/AUTH_system/iccnu HTTP/1.1
+x-auth-token: AUTH_tk05659f58871e426e9f4095def3cfe1ee
+x-storage-token: AUTH_tk05659f58871e426e9f4095def3cfe1ee
+Host: 119.97.166.140:8080
+
+2.2 Create container
+
+PUT http://119.97.166.140:8080/v1/AUTH_system/iccnu HTTP/1.1
+x-auth-token: AUTH_tk05659f58871e426e9f4095def3cfe1ee
+x-storage-token: AUTH_tk05659f58871e426e9f4095def3cfe1ee
+Host: 119.97.166.140:8080
+Content-Length: 0
+
+2.3 Show container metadata
+
+HEAD http://119.97.166.140:8080/v1/AUTH_system/iccnu HTTP/1.1
+x-auth-token: AUTH_tk05659f58871e426e9f4095def3cfe1ee
+x-storage-token: AUTH_tk05659f58871e426e9f4095def3cfe1ee
+Host: 119.97.166.140:8080
+
+2.3 Show file metadata
+
+HEAD http://119.97.166.140:8080/v1/AUTH_system/iccnu HTTP/1.1
+x-auth-token: AUTH_tk05659f58871e426e9f4095def3cfe1ee
+x-storage-token: AUTH_tk05659f58871e426e9f4095def3cfe1ee
+Host: 119.97.166.140:8080
