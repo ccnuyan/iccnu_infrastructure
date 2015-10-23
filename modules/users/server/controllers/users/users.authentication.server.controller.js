@@ -36,16 +36,14 @@ exports.token = function (req, res, next) {
 
      适用于bs/cs
      */
-    if (req.headers.lrs_token !== null) {
+    if (req.body.lrs_token !== null) {
 
-        var lrs_token = req.headers.lrs_token;
+        var lrs_token = req.body.lrs_token;
 
         var options = config.lrs_user_info_options;
         options.headers = {
             'Authorization': 'Bearer ' + lrs_token
         };
-
-        console.log(lrs_token);
 
         var tkReq = protocol.request(options, function (tkRes) {
 
