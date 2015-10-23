@@ -45,6 +45,8 @@ exports.token = function (req, res, next) {
             'Authorization': 'Bearer ' + lrs_token
         };
 
+        console.log(lrs_token);
+
         var tkReq = protocol.request(options, function (tkRes) {
 
             var body = '';

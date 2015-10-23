@@ -29,7 +29,7 @@ module.exports = {
         tokenURL: 'http://lrs.iccnu.net/xAPI/oauth2/access_token',
         clientID: '9f93d625f00c6461b4af',
         clientSecret: '74c0d823032f0be85f95bf02b94c62c3709a7d55',
-        callbackURL: 'http://localhost:3000/auth/iccnu/login',
+        callbackURL: 'http://inf.iccnu.net:8180/auth/iccnu/login',
         state: true
     },
     lrs_user_info_options: {
