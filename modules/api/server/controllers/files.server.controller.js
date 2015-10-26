@@ -71,6 +71,7 @@ exports.create = function (req, res, next) {
 
     var tfObj = tempFileObject.toObject();
     delete tfObj.id;
+    tfObj.usage = 'disk';
 
     var fileObject = new FileObject(tfObj);
 

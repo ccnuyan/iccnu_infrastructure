@@ -125,7 +125,16 @@ gulp.task('es-importResources', function (done) {
 // Set NODE_ENV to 'development'
 gulp.task('ops-deleteContainer', function (done) {
 
-    var container = 'iccnu-temp';
+    //{name: 'iccnu-temp-production' }
+    //{name: 'iccnu-cloud-production' }
+    //
+    //{name: 'iccnu-temp-dev' }
+    //{name: 'iccnu-cloud-dev' }
+    //
+    //{name: 'iccnu-temp-test' }
+    //{name: 'iccnu-cloud-test' }
+
+    var container = 'iccnu-temp-dev';
 
     swiftInitializer.init(function (err, swift) {
         if (err) {
@@ -148,7 +157,16 @@ gulp.task('ops-deleteContainer', function (done) {
 
 gulp.task('ops-createContainer', function (done) {
 
-    var container = 'iccnu-cloud-dev';
+    //{name: 'iccnu-temp-production' }
+    //{name: 'iccnu-cloud-production' }
+    //
+    //{name: 'iccnu-temp-dev' }
+    //{name: 'iccnu-cloud-dev' }
+    //
+    //{name: 'iccnu-temp-test' }
+    //{name: 'iccnu-cloud-test' }
+
+    var container = 'iccnu-temp-dev';
 
     swiftInitializer.init(function (err, swift) {
         if (err) {

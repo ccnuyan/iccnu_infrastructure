@@ -43,6 +43,8 @@ exports.upload = function (req, res, next) {
                 tempFileObject.name = req.openstack.fileName;
                 tempFileObject.etag = ret.headers.etag;
 
+                tempFileObject.usage = 'temp';
+
                 tempFileObject.save(function (err, retFile) {
                     if (err) {
                         return next({db: err});

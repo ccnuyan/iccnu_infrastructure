@@ -33,6 +33,11 @@ var FileObjectSchema = new Schema({
     created: {
         type: Date,
         default: Date.now
+    },
+    usage: {
+        type: String,
+        enum: ['temp','resource', 'disk', 'questionnaire'],
+        default: 'temp'
     }
 });
 

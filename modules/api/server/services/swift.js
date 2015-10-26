@@ -321,9 +321,12 @@ Swift.prototype.deleteContainer = function (container, callback) {
     var objects = [];
     var remove = function () {
         self.request({
-            path: '/v1.0/' + self.account + '/' + container,
-            method: 'DELETE'
+            path: '/v1.0/' + self.account + '/' + container, method: 'DELETE'
         }, callback);
+    };
+
+    var checkAndRemove = function () {
+        if (++deleted === objects.length)remove();
     };
 
     this.listObjects(container, function (err, result) {
@@ -332,14 +335,11 @@ Swift.prototype.deleteContainer = function (container, callback) {
         } catch (e) {
         }
 
-        var deleteCallback = function () {
-            if (++deleted === objects.length)
-                remove();
-        };
-
         if (!objects.length) remove();
-        for (var i = 0; i < objects.length; i++)
-            self.deleteObject(container, objects[i].name, deleteCallback());
+        // delete all objects in container first
+        objects.forEach(function (obj) {
+            self.deleteObject(container, obj.name, checkAndRemove);
+        });
     });
 };
 

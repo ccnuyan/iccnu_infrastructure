@@ -83,6 +83,7 @@ exports.edit = function (req, res, next) {
 
                 var tempFileObject = tempFile.toObject();
                 delete tempFileObject.id;
+                tempFileObject.usage = 'questionnaire';
 
                 var file = new File(tempFileObject);
 

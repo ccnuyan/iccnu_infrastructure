@@ -354,15 +354,17 @@ var publishResource = function (req, res, next, container, sourceFileObject) {
 exports.createByFile = function (req, res, next) {
 
     var fileObject = req.file.fileObject;
+    fileObject.usage = 'resource';
 
     publishResource(req, res, next, cloudBox, fileObject);
 };
 
 exports.createByTempFile = function (req, res, next) {
 
-    var fileObject = req.tempFileObject;
+    var tempFileObject = req.tempFileObject;
+    tempFileObject.usage = 'resource';
 
-    publishResource(req, res, next, tempBox, fileObject);
+    publishResource(req, res, next, tempBox, tempFileObject);
 };
 
 exports.createByLink = function (req, res, next) {
