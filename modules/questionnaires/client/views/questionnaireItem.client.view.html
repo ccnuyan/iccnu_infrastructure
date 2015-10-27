@@ -5,19 +5,14 @@
     </div>
     <br/>
 
+    <h4>{{questionnaire.title}}</h4>
     <div class="row">
         <div class="col-md-4">
-            <div class="btn-group">
-                <div ng-show="authentication.user && authentication.user._id === questionnaire.user"
-                     class="btn btn-danger" ng-click="clear()">清空问卷提交记录
-                </div>
-                <div class="btn btn-success" ng-click="showQrCode()">二维码</div>
-            </div>
+            <div class="btn btn-success" ng-click="showQrCode()">二维码</div>
         </div>
         <div class="col-md-8 hidden-xs">
             <div class=" text-muted">
                 创建: {{questionnaire.created | date:'shortDate'}} {{questionnaire.created | date:'shortTime'}}
-                修改: {{questionnaire.created | date:'shortDate'}} {{questionnaire.updated | date:'shortTime'}}
             </div>
         </div>
     </div>

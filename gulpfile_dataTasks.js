@@ -123,7 +123,7 @@ gulp.task('es-importResources', function (done) {
 });
 
 // Set NODE_ENV to 'development'
-gulp.task('ops-deleteContainer', function (done) {
+gulp.task('ops-clearContainer', function (done) {
 
     //{name: 'iccnu-temp-production' }
     //{name: 'iccnu-cloud-production' }
@@ -142,7 +142,7 @@ gulp.task('ops-deleteContainer', function (done) {
         }
         console.log(container);
 
-        swift.deleteContainer(container, function (opsErr, opsRet) {
+        swift.clearContainer(container, function (opsErr, opsRet) {
             console.log(opsRet.statusCode);
             if (opsErr || opsRet.statusCode !== 204) {
                 console.log(opsErr);

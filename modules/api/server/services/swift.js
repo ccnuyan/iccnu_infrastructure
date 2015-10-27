@@ -315,30 +315,17 @@ Swift.prototype.createContainer = function (container, callback) {
 };
 
 // Delete Container
-Swift.prototype.deleteContainer = function (container, callback) {
+Swift.prototype.clearContainer = function (container, callback) {
     var self = this;
-    var deleted = 0;
     var objects = [];
-    var remove = function () {
-        self.request({
-            path: '/v1.0/' + self.account + '/' + container, method: 'DELETE'
-        }, callback);
-    };
-
-    var checkAndRemove = function () {
-        if (++deleted === objects.length)remove();
-    };
 
     this.listObjects(container, function (err, result) {
         try {
             objects = JSON.parse(result.body);
         } catch (e) {
         }
-
-        if (!objects.length) remove();
-        // delete all objects in container first
         objects.forEach(function (obj) {
-            self.deleteObject(container, obj.name, checkAndRemove);
+            self.deleteObject(container, obj.name);
         });
     });
 };

@@ -11,11 +11,11 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 var QuestionnaireSchema = new Schema({
-    created: {
-        type: Date,
-        default: Date.now
+    title: {
+        type: String,
+        required: true
     },
-    updated: {
+    created: {
         type: Date,
         default: Date.now
     },

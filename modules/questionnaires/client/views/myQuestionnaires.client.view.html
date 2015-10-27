@@ -13,10 +13,16 @@
         <br>
     </div>
 
-    <ul class="list-group">
+    <ul class="col-xs-12 col-md-3 list-group">
+        <div class="list-group-item" ng-repeat="monthItem in months" ng-click="onMonthClick(monthItem)">
+            {{monthItem._id.year}}-{{monthItem._id.month}}({{monthItem.count}})
+        </div>
+    </ul>
+    <ul class="col-xs-12 col-md-9 list-group">
         <li ui-sref="questionnaires.questionnaire({questionnaire:questionnaire._id})" class="list-group-item"
             ng-repeat="questionnaire in questionnaires">
-            <img style="height: 200px" class="img-responsive thumbnail"
+            <div>{{questionnaire.title}}</div>
+            <img style="height: 160px" class="img-responsive thumbnail"
                  ng-src="api/questionnaire/attachments/{{questionnaire.image._id}}"/>
 
             <div ng-repeat="c in choices.slice(0,questionnaire.choices)">

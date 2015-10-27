@@ -26,6 +26,9 @@ exports.invokeRolesPolicies = function () {
         allows: [{
             resources: '/api/questionnaires/',
             permissions: ['get', 'post']
+        },{
+            resources: '/api/questionnaires/aggregate',
+            permissions: ['get']
         }, {
             resources: '/api/questionnaires/:questionnaireId',
             permissions: ['get']

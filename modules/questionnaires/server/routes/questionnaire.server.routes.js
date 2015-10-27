@@ -15,8 +15,10 @@ module.exports = function (app) {
         .get(questionnaire.list)
         .post(questionnaire.create);
 
+    app.route('/api/questionnaires/aggregate').all(questionnairePolicy.isAllowed)
+        .get(questionnaire.aggregateByMonth);
+
     app.route('/api/questionnaires/:questionnaireId')
-        .put(questionnairePolicy.isAllowed, questionnaire.edit)
         .delete(questionnairePolicy.isAllowed, questionnaire.remove);
 
     app.route('/api/questionnaires/clear/:questionnaireId')

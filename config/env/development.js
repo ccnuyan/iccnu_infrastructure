@@ -2,7 +2,7 @@
 
 
 module.exports = {
-    db: 'mongodb://dianxin.mongo:8888/iccnu-yan-dev',
+    db: 'mongodb://dianxin.mongo:8888/iccnu-inf-dev',
     port: 3000,
     app: {
         title: 'ICCNU - Development Environment'
