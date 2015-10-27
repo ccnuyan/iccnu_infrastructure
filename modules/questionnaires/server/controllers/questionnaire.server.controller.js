@@ -22,19 +22,42 @@ var tempBox = config.openStackConfig.temp;
 exports.list = function (req, res, next) {
     var me = req.user;
 
-    Questionnaire.find({user: me.id})
+    var condition = {user: me.id};
+
+    if (req.query.year && req.query.month) {
+        condition.created = {
+            $gte: new Date(req.query.year, Number(req.query.month) - 1, 1),
+            $lt: new Date(req.query.year, Number(req.query.month), 1)
+        };
+    }
+
+    Questionnaire.find(condition)
         .populate('user', '_id username email')
         .populate('image')
         .sort({
-            updated: 'desc'
+            created: 'desc'
         })
-        .limit(1)
         .exec(function (err, questionnaires) {
             if (err) {
                 return next({db: err});
             }
 
             return res.status(200).json(questionnaires);
+        });
+};
+
+exports.aggregateByMonth = function (req, res, next) {
+    Questionnaire.aggregate([{
+        $group: {
+            _id: {year: {$year: '$created'}, month: {$month: '$created'}},
+            count: {$sum: 1}
+        }
+    }])
+        .exec(function (err, ret) {
+            if (err) {
+                return next({db: err});
+            }
+            return res.status(200).json(ret);
         });
 };
 
@@ -48,87 +71,43 @@ exports.create = function (req, res, next) {
 
     questionnaire.user = req.user._id;
     questionnaire.choices = req.body.choices;
+    questionnaire.title = req.body.title;
 
-    questionnaire.save(function (err, retQn) {
-        if (err) {
-            return next({db: err});
-        }
-        Questionnaire.findById(retQn._id)
-            .populate('image')
-            .exec(function (err, questionnaire) {
+    TempFileObject.findById(req.body.tempFileId)
+        .exec(function (err, tempFile) {
+
+            var tempFileObject = tempFile.toObject();
+            delete tempFileObject.id;
+            tempFileObject.usage = 'questionnaire';
+
+            var file = new File(tempFileObject);
+
+            swiftInitializer.init(function (err, swift) {
                 if (err) {
-                    return next({db: err});
+                    return next({message: 'cloud storage error'});
                 }
-                return res.status(201).json(questionnaire);
-            });
-    });
-};
 
-exports.edit = function (req, res, next) {
-    var questionnaire = req.questionnaire;
-
-    var imageToBeRemoved;
-
-    if (questionnaire.image) {
-        imageToBeRemoved = questionnaire.image;
-    }
-    if (req.body.choices) {
-        questionnaire.choices = req.body.choices;
-    }
-
-    if (req.body.tempFileId) {
-        var fileId = req.body.tempFileId;
-        TempFileObject.findById(fileId)
-            .exec(function (err, tempFile) {
-
-                var tempFileObject = tempFile.toObject();
-                delete tempFileObject.id;
-                tempFileObject.usage = 'questionnaire';
-
-                var file = new File(tempFileObject);
-
-                swiftInitializer.init(function (err, swift) {
-                    if (err) {
-                        return next({message: 'cloud storage error'});
+                //在云里把临时文件复制到使用的文件
+                swift.copyObject(cloudBox, file._id, tempBox, tempFile._id, function (opsErr, opsRet) {
+                    if (opsErr || opsRet.statusCode !== 201) {
+                        return next({message: 'cloud storage copy object error'});
                     }
-
-                    //在云里把临时文件复制到使用的文件
-                    swift.copyObject(cloudBox, file._id, tempBox, tempFile._id, function (opsErr, opsRet) {
-                        if (opsErr || opsRet.statusCode !== 201) {
-                            return next({message: 'cloud storage copy object error'});
+                    //使用的文件保存
+                    file.save(function (err, fileUsedRet) {
+                        if (err) {
+                            return next({db: err});
                         }
-                        //使用的文件保存
-                        file.save(function (err, fileUsedRet) {
+                        questionnaire.image = fileUsedRet;
+                        questionnaire.save(function (err, retQn) {
                             if (err) {
                                 return next({db: err});
                             }
-                            questionnaire.image = fileUsedRet;
-                            questionnaire.updated = Date.now();
-                            Questionnaire.findByIdAndUpdate(questionnaire.id, questionnaire)
-                                .populate('image')
-                                .exec(function (err, retQn) {
-                                    if (err) {
-                                        return next({db: err});
-                                    }
-                                    if (imageToBeRemoved)imageToBeRemoved.remove();
-                                    return res.status(200).json(retQn);
-                                });
+                            return res.status(200).json(retQn);
                         });
                     });
                 });
             });
-    }
-    else {
-        Questionnaire.findByIdAndUpdate(questionnaire.id, questionnaire)
-            .populate('image')
-            .exec(function (err, retQn) {
-                if (err) {
-                    return next({db: err});
-                }
-
-                return res.status(200).json(retQn);
-            });
-    }
+        });
 };
 
 exports.clear = function (req, res, next) {
