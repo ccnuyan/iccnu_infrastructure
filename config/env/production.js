@@ -26,7 +26,7 @@ module.exports = {
         tokenURL: 'http://lrs.iccnu.net/xAPI/oauth2/access_token',
         clientID: process.env.CLIENT_ID,
         clientSecret: process.env.CLIENT_SECRET,
-        callbackURL: 'http://inf.iccnu.net:8180/auth/iccnu/login',
+        callbackURL: 'http://inf.iccnu.net/auth/iccnu/login',
         state: true
     },
     lrs_user_info_options: {
