@@ -56,7 +56,7 @@ exports.token = function (req, res, next) {
 
                 if (res.statusCode !== 200) {
                     console.log(body);
-                    done({message: 'Unauthorized'});
+                    next({message: 'Unauthorized'});
                 }
 
                 // Data reception is done, do whatever with it!
