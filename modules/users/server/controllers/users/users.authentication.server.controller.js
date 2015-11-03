@@ -59,6 +59,11 @@ exports.token = function (req, res, next) {
                     next({message: 'Unauthorized'});
                 }
 
+                if (body === 'Access Token does not exist') {
+                    console.log(body);
+                    next({message: 'Unauthorized'});
+                }
+
                 // Data reception is done, do whatever with it!
                 var parsedUser = JSON.parse(body);
 
