@@ -42,7 +42,7 @@ exports.token = function (req, res, next) {
 
         var options = config.lrs_user_info_options;
         options.headers = {
-            'Authorization': 'Bearer ' + lrs_token
+            Authorization: 'Bearer ' + lrs_token
         };
 
         var tkReq = protocol.request(options, function (tkRes) {
