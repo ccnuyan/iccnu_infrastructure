@@ -44,7 +44,7 @@ module.exports = function (app) {
             var options = config.lrs_user_info_options;
 
             options.headers = {
-                'Authorization': 'Bearer ' + accessToken
+                Authorization: 'Bearer ' + accessToken
             };
 
             var req = protocol.request(options, function (res) {
@@ -53,7 +53,13 @@ module.exports = function (app) {
                 res.on('data', function (d) {
                     body += d;
                 });
+
                 res.on('end', function () {
+
+                    if (res.statusCode !== 200) {
+                        console.log(body);
+                        done({message: 'Unauthorized'});
+                    }
 
                     var parsedUser = JSON.parse(body);
 

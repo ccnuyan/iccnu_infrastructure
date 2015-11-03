@@ -51,7 +51,13 @@ exports.token = function (req, res, next) {
             tkRes.on('data', function (d) {
                 body += d;
             });
+
             tkRes.on('end', function () {
+
+                if (res.statusCode !== 200) {
+                    console.log(body);
+                    done({message: 'Unauthorized'});
+                }
 
                 // Data reception is done, do whatever with it!
                 var parsedUser = JSON.parse(body);
