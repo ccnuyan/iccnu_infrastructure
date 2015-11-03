@@ -132,7 +132,6 @@ var UserSchema = new Schema({
 var Directory = mongoose.model('Directory');
 
 UserSchema.pre('save', function (next) {
-    console.log('save');
     var user = this;
     if (!user.rootDirectory) {
         var userRoot = new Directory({
@@ -140,7 +139,6 @@ UserSchema.pre('save', function (next) {
             user: this,
             depth: 0
         });
-        console.log('creating root');
         userRoot.save(function (err, retDir) {
             if (err) {
                 return next({db: err});
@@ -150,7 +148,6 @@ UserSchema.pre('save', function (next) {
             }
         });
     } else {
-        console.log('user have root');
         next();
     }
 });
