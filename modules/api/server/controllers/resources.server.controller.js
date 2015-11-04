@@ -97,11 +97,20 @@ exports.search = function (req, res, next) {
                         return next({db: err});
                     }
 
+                    var orderdResources = [];
+                    ids.forEach(function (id) {
+                        resources.forEach(function (node) {
+                            if(node._id.toString() === id.toString()){
+                                orderdResources.push(node);
+                            }
+                        });
+                    });
+
                     return res.status(200).json({
                         page: page,
                         pages: response.hits.total / perPage,
                         total: response.hits.total,
-                        resources: resources
+                        resources: orderdResources
                     });
                 });
         } else {

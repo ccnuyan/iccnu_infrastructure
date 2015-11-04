@@ -17,7 +17,7 @@ module.exports = {
         xAuthKey: 'testpass'
     },
     esConfig: {
-        host: 'dianxin.engine:9200',
+        host: 'engine.iccnu.net:9200',
         log: {
             type: 'file',
             level: 'trace',

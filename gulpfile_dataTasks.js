@@ -6,9 +6,11 @@ var _ = require('lodash'),
 
 gulp.task('es-importKnowledgeNodes', function (done) {
 
-    //process.env.NODE_ENV = 'develepmment';
-    process.env.NODE_ENV = 'production';
-    process.env.MONGOHQ_URL = 'mongodb://www.iccnu.net:30000/iccnu';
+    var path = require('path');
+    var config = require(path.resolve('./config/config'));
+
+    config.db = 'mongodb://mongo.iccnu.net:30000/iccnu';
+    config.esConfig.host = 'engine.iccnu.net:9200';
 
     // Open mongoose connections
     var mongoose = require('./config/lib/mongoose.js');
@@ -17,8 +19,6 @@ gulp.task('es-importKnowledgeNodes', function (done) {
     mongoose.connect(function () {
 
         var KnowledgeNode = require('mongoose').model('KnowledgeNode');
-        var path = require('path');
-        var config = require(path.resolve('./config/config'));
         var elasticsearch = require('elasticsearch');
         var client = new elasticsearch.Client(config.esConfig);
 

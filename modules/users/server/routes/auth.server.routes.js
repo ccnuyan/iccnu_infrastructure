@@ -58,12 +58,12 @@ module.exports = function (app) {
 
                     if (res.statusCode !== 200) {
                         console.log(body);
-                        next({message: 'Unauthorized'});
+                        done({message: 'Unauthorized'});
                     }
 
                     if (body === 'Access Token does not exist') {
                         console.log(body);
-                        next({message: 'Unauthorized'});
+                        done({message: 'Unauthorized'});
                     }
 
                     var parsedUser = JSON.parse(body);

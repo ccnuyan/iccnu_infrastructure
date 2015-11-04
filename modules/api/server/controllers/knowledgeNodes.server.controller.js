@@ -28,8 +28,6 @@ exports.search = function (req, res, next) {
     var matches = [];
 
     matches.push({match: {title: req.query.term}});
-    matches.push({match: {description: req.query.term}});
-    matches.push({match: {code: req.query.term}});
 
     searchParams.dis_max = {queries: matches};
 
@@ -67,13 +65,23 @@ exports.search = function (req, res, next) {
         });
 
         if (response && !response.timeout) {
+
             KnowledgeNode.find({_id: {$in: ids}})
                 .exec(function (err, nodes) {
                     if (err) {
                         return next({db: err});
                     }
 
-                    return res.status(200).json(nodes);
+                    var orderdNodes = [];
+                    ids.forEach(function (id) {
+                        nodes.forEach(function (node) {
+                            if(node._id.toString() === id.toString()){
+                                orderdNodes.push(node);
+                            }
+                        });
+                    });
+
+                    return res.status(200).json(orderdNodes);
                 });
         }
     });

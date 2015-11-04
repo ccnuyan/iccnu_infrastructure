@@ -8,20 +8,26 @@ angular.module('resources').factory('Subjects',
             name: '所有学科',
             active: 'active'
         }, {
-            key: 'cjsk',
-            name: '初中语文'
+            key: 'zhongxue_yuwen',
+            name: '中学语文'
         }, {
-            key: 'mjsk',
-            name: '初中数学'
+            key: 'zhongxue_shuxue',
+            name: '中学数学'
         }, {
-            key: 'ejsk',
-            name: '初中英语'
+            key: 'zhongxue_yingyu',
+            name: '中学英语'
         }, {
-            key: 'pjsk',
-            name: '初中物理'
+            key: 'zhongxue_dili',
+            name: '中学地理'
+        },{
+            key: 'zhongxue_wuli',
+            name: '中学物理'
         }, {
-            key: 'pjck',
-            name: '初中化学'
+            key: 'zhongxue_huaxue',
+            name: '中学化学'
+        }, {
+            key: 'zhongxue_shengwu',
+            name: '中学生物'
         }];
 
         var getSubjectName = function (key) {
