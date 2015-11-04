@@ -113,7 +113,6 @@ angular.module('disk').controller('MyDiskController',
 
                 Directory.query({directoryId: directory}, function (data) {
                     $scope.current = data;
-                    console.log($scope.current);
                     if ($scope.current.subFiles) {
                         $scope.current.subFiles.forEach(function (subfile) {
                             subfile.parent = $scope.current._id;
