@@ -303,7 +303,7 @@ var publishResource = function (req, res, next, container, sourceFileObject) {
     var resource = new Resource();
 
     //如果是admin发布，则不需要审核
-    if (req.user.roles.indexOf('rsadmin') >= 0) {
+    if (req.user.roles.indexOf('resourceAdmin') >= 0) {
         resource.status = 'approved';
     }
 
@@ -413,7 +413,7 @@ exports.import = function (req, res, next) {
             workbook._worksheets[1]._rows.forEach(function (resCell) {
                 var resource = new Resource();
 
-                if (req.user.roles.indexOf('rsadmin') >= 0) {
+                if (req.user.roles.indexOf('resourceAdmin') >= 0) {
                     resource.status = 'approved';
                 }
 
@@ -498,7 +498,7 @@ exports.edit = function (req, res, next) {
         var status = 'submitted';
 
         //如果是admin发布，则不需要审核
-        if (req.user.roles.indexOf('rsadmin') >= 0) {
+        if (req.user.roles.indexOf('resourceAdmin') >= 0) {
             status = 'approved';
         }
 

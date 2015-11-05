@@ -16,7 +16,7 @@ acl = new acl(new acl.memoryBackend());
 
 exports.invokeRolesPolicies = function () {
     acl.allow([{
-        roles: ['admin', 'rsadmin'],
+        roles: ['admin', 'resourceAdmin'],
         allows: []
     }, {
         roles: ['user'],

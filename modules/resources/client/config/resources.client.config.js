@@ -27,13 +27,13 @@ angular.module('resources').run(['Menus',
         Menus.addSubMenuItem('topbar', 'resources', {
             title: '资源审核',
             state: 'resources.review',
-            roles: ['rsadmin']
+            roles: ['resourceAdmin']
         });
 
         Menus.addSubMenuItem('topbar', 'resources', {
             title: '资源批量添加',
             state: 'resources.importer',
-            roles: ['rsadmin']
+            roles: ['resourceAdmin']
         });
     }
 ]);
