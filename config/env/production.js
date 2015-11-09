@@ -22,15 +22,15 @@ module.exports = {
         }
     },
     lrs_oauth_config: {
-        authorizationURL: 'http://119.97.166.148/xAPI/oauth2/authorize',
-        tokenURL: 'http://119.97.166.148/xAPI/oauth2/access_token',
+        authorizationURL: 'http://'+process.env.LRS_HOST+'/xAPI/oauth2/authorize',
+        tokenURL: 'http://'+process.env.LRS_HOST+'/xAPI/oauth2/access_token',
         clientID: process.env.CLIENT_ID,
         clientSecret: process.env.CLIENT_SECRET,
-        callbackURL: 'http://119.97.166.139/auth/iccnu/login',
+        callbackURL: 'http://'+process.env.INF_HOST+'/auth/iccnu/login',
         state: true
     },
     lrs_user_info_options: {
-        host: '119.97.166.148',
+        host: process.env.LRS_HOST,
         port: 80,
         path: '/xAPI/oauth2/user_info',
         method: 'GET'
