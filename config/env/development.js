@@ -1,8 +1,8 @@
 'use strict';
 
 module.exports = {
-    //db: 'mongodb://dianxin.dev:8888/iccnu-inf-dev',
-    db: 'mongodb://localhost:27017/iccnu-inf-dev',
+    db: 'mongodb://dianxin.dev:8888/iccnu-inf-dev',
+    //db: 'mongodb://localhost:27017/iccnu-inf-dev',
     port: 3000,
     app: {
         title: 'ICCNU - Development Environment'
@@ -16,20 +16,6 @@ module.exports = {
         xAuthUser: 'system:root',
         xAuthKey: 'testpass'
     },
-    //lrs_oauth_config: {
-    //    authorizationURL: 'http://119.97.166.148/xAPI/oauth2/authorize',
-    //    tokenURL: 'http://119.97.166.148/xAPI/oauth2/access_token',
-    //    clientID: '9f93d625f00c6461b4af',
-    //    clientSecret: '74c0d823032f0be85f95bf02b94c62c3709a7d55',
-    //    callbackURL: 'http://localhost:3000/auth/iccnu/login',
-    //    state: true
-    //},
-    //lrs_user_info_options: {
-    //    host: '119.97.166.148',
-    //    port: 80,
-    //    path: '/xAPI/oauth2/user_info',
-    //    method: 'GET'
-    //},
     lrs_oauth_config: {
         authorizationURL: 'http://web.local:8000/xAPI/oauth2/authorize',
         tokenURL: 'http://web.local:8000/xAPI/oauth2/access_token',
