@@ -10,6 +10,8 @@ angular.module('users').controller('AuthenticationController', ['$window', '$sta
         // OAuth provider request
         $scope.callOauthProvider = function (url) {
 
+            console.log(url);
+
             var redirect_to;
 
             if ($state.previous) {
