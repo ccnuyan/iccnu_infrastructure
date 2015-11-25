@@ -5,6 +5,17 @@ angular.module('questionnaire').controller('QuestionnaireItemController',
     ['$scope', '$state', 'Socket', 'Questionnaire', '$stateParams', '$modal', 'Authentication', 'toastr', '$http',
         function ($scope, $state, Socket, Questionnaire, $stateParams, $modal, Authentication, toastr, $http) {
 
+            var total = function () {
+                return $scope.questionnaire.choiceA +
+                    $scope.questionnaire.choiceB +
+                    $scope.questionnaire.choiceC +
+                    $scope.questionnaire.choiceD +
+                    $scope.questionnaire.choiceE +
+                    $scope.questionnaire.choiceF +
+                    $scope.questionnaire.choiceG +
+                    $scope.questionnaire.choiceH;
+            };
+
             $scope.authentication = Authentication;
 
             $scope.showQrCode = function () {
@@ -34,17 +45,6 @@ angular.module('questionnaire').controller('QuestionnaireItemController',
                 {key: 'H', choiceType: 'primary', choiceClass: 'progress-striped'}];
 
             var questionnaireId = $stateParams.questionnaire;
-
-            var total = function () {
-                return $scope.questionnaire.choiceA +
-                    $scope.questionnaire.choiceB +
-                    $scope.questionnaire.choiceC +
-                    $scope.questionnaire.choiceD +
-                    $scope.questionnaire.choiceE +
-                    $scope.questionnaire.choiceF +
-                    $scope.questionnaire.choiceG +
-                    $scope.questionnaire.choiceH;
-            };
 
             $scope.find = function () {
                 $scope.questionnaire = Questionnaire.info({questionnaireId: questionnaireId}, function () {
