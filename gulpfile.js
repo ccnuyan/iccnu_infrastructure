@@ -47,15 +47,6 @@ gulp.task('csslint', function (done) {
             }
         }));
 });
-
-// JS linting task
-gulp.task('jshint', function () {
-    return gulp.src(_.union(defaultAssets.server.allJS, defaultAssets.client.js, testAssets.tests.server, testAssets.tests.client, testAssets.tests.e2e))
-        .pipe(plugins.jshint())
-        .pipe(plugins.jshint.reporter('default'))
-        .pipe(plugins.jshint.reporter('fail'));
-});
-
 // JS minifying task
 gulp.task('uglify', function () {
     return gulp.src(defaultAssets.client.js)
@@ -76,7 +67,7 @@ gulp.task('cssmin', function () {
 });
 
 gulp.task('lint', function (done) {
-    runSequence('csslint', 'jshint', done);
+    runSequence('csslint',done);
 });
 
 gulp.task('test', function (done) {
