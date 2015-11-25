@@ -35,7 +35,7 @@ module.exports = function (app, db) {
 
     var io = require('socket.io')(server);
 
-    io.adapter(redis({host: '119.97.166.139', port: 6000}));
+    io.adapter(redis({host: config.redis.ip, port: config.redis.port}));
 
 
     //io.listen(server);

@@ -5,6 +5,10 @@ module.exports = {
     port: process.env.PORT || 8080,
     db: process.env.MONGOHQ_URL,
     tempDir: '/uploads/',
+    redis:{
+        ip:process.env.REDIS_IP,
+        port:process.env.REDIS_PORT
+    },
     openStackConfig: {
         cloudUrl: process.env.CLOUD_URL,
         cloudPort: '8080',
@@ -12,14 +16,6 @@ module.exports = {
         temp: 'iccnu-temp-production',
         xAuthUser: process.env.CLOUD_USER,
         xAuthKey: process.env.CLOUD_PASS
-    },
-    esConfig: {
-        host: process.env.ENGINE_HOST,
-        log: {
-            type: 'file',
-            level: 'trace',
-            path: 'elasticsearch.prod.log'
-        }
     },
     lrs_oauth_config: {
         authorizationURL: 'http://'+process.env.LRS_HOST+'/xAPI/oauth2/authorize',
@@ -34,5 +30,13 @@ module.exports = {
         port: 80,
         path: '/xAPI/oauth2/user_info',
         method: 'GET'
+    },
+    esConfig: {
+        host: process.env.ENGINE_HOST,
+        log: {
+            type: 'file',
+            level: 'trace',
+            path: 'elasticsearch.prod.log'
+        }
     }
 };
