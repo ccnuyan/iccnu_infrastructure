@@ -20,6 +20,16 @@ exports.signout = function (req, res) {
     res.redirect('/');
 };
 
+exports.cyberHouseSignout = function (req, res) {
+    req.logout();
+    res.redirect('http://122.204.161.147:8080/cyberhouse/enterspace.jsp');
+};
+
+exports.apiSignout = function (req, res) {
+    req.logout();
+    res.send('OK');
+};
+
 exports.oauth2signout = function (req, res) {
     req.logout();
     res.redirect('/oauth2/signin?&response_type=code&state=' + req.query.state + '&client_id=' +

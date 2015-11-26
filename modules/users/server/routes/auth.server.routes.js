@@ -24,7 +24,11 @@ module.exports = function (app) {
 
     var users = require('../controllers/users.server.controller');
 
-    app.route('/api/auth/signout').get(users.signout);
+    app.route('/api/auth/signout').get(users.apiSignout);
+
+    app.route('/auth/signout').get(users.signout);
+
+    app.route('/auth/cyber_house/signout').get(users.cyberHouseSignout);
 
     app.route('/api/token').post(passport.authenticate(['client-basic', 'client-password'], {session: false}), users.token);
 

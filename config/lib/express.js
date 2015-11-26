@@ -22,7 +22,6 @@ var config = require('../config'),
 var multer = require('multer');
 var upload = multer({dest: config.tempDir});
 
-
 /**
  * Initialize local variables
  */
@@ -238,7 +237,6 @@ module.exports.disableCache = function (app) {
         next();
     });
 };
-
 
 /**
  * Initialize the Express application

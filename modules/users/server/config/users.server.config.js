@@ -10,23 +10,6 @@ var passport = require('passport'),
 
 module.exports = function (app, db) {
 
-    // TODO to be optimized
-    //passport.serializeUser(function(user, done) {
-    //	User.findOne({_id: user._id},function (err, user) {
-    //		if (err) {
-    //			done(err);
-    //		}
-    //		var ou = user.toObject();
-    //		delete ou.token;
-    //		done(null, ou);
-    //	});
-    //});
-    //
-    //// Deserialize sessions
-    //passport.deserializeUser(function(ou, done) {
-    //	done(null, mongoose.Types.ObjectId(ou._id));
-    //});
-
     // Serialize sessions 只有在Session访问时有效，token访问时无效
     passport.serializeUser(function (user, done) {
         done(null, user.id);
