@@ -34,8 +34,6 @@ module.exports = function (app) {
 
     app.route('/api/oauth2/me').all(oauth2Policy.isAllowed).get(users.me);
 
-    app.route('/auth/iccnu').get(passport.authenticate('oauth2'));
-
     app.route('/auth/iccnu/login').get(passport.authenticate('oauth2',
         {
             failureRedirect: '/server-error',

@@ -6,18 +6,10 @@ angular.module('users').controller('AuthenticationController', ['$window', '$sta
         // OAuth provider request
         $scope.callOauthProvider = function (url) {
             // If user is signed in then redirect back home
-
             $http.get('/api/auth/signout')
-                .then(function(data){
-                    debugger;
-                    var redirect_to;
-
-                    if ($state.previous) {
-                        redirect_to = $state.previous.href;
-                    }
-
+                .then(function(){
                     // Effectively call OAuth authentication route:
-                    $window.location.href = url + (redirect_to ? '?redirect_to=' + encodeURIComponent(redirect_to) : '');
+                    $window.location.href = url;
                 }
             );
         };
